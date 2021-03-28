@@ -4,50 +4,37 @@ using UnityEngine;
 
 public class Rotate2 : MonoBehaviour
 {
+    private Camera myCam;
+    private Vector3 screenPos;
+    private float angleOffset;
 
-    public float speed = 5f;
-
-    private Vector3 startPos;
-    private bool isBeingHeld = false;
+    void Start()
+    {
+        myCam = Camera.main;
+    }
 
     void Update()
     {
-      if (isBeingHeld == true)
-        {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            Vector2 direction = mousePos - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        //makes sure only left Mouse Button works
+        //This fires only on the frame the button is clicked
         if (Input.GetMouseButtonDown(0))
         {
-
-            Vector2 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            //makes sure the Object does not snaps to the cursor
-            float startPosX = mousePos.x - this.transform.localPosition.x;
-            float startPosY = mousePos.y - this.transform.localPosition.y;
-
-            startPos = new Vector3(startPosX, startPosY, 0f);
-
-            isBeingHeld = true;
-
+            screenPos = myCam.WorldToScreenPoint(transform.position);
+            Vector3 v3 = Input.mousePosition - screenPos;
+            angleOffset = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(v3.y, v3.x)) * Mathf.Rad2Deg;
         }
-    }
 
-    private void OnMouseUp()
-    {
-        isBeingHeld = false;
+
+        //This fires while the button is pressed down
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 v3 = Input.mousePosition - screenPos;
+            float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
+            transform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+        }
+
+       /*
+        * Note to Self:
+        * To change the Hinge the Object is rotated around a custom Pivot can be created in the Sprite Inspector (Import Settings)
+        */
     }
 }

@@ -242,10 +242,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 139636802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6c14846d3e4a4468c264cc2df4039e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b91fa77ace8d904e9eb130630efa49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!1 &173784061
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +504,7 @@ GameObject:
   - component: {fileID: 1433467391}
   - component: {fileID: 1433467394}
   m_Layer: 0
-  m_Name: Card_0
+  m_Name: Spin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
