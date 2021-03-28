@@ -7,6 +7,7 @@ public class Explode : MonoBehaviour
     public float targetTime = 2.0f;
     public float timer = 2.0f;
     public double targetClicks = 10;
+    // public ParticleSystem ExplosionParticleSystem;
 
     private double counter = 0;
 
@@ -29,7 +30,7 @@ public class Explode : MonoBehaviour
 
         if (counter >= targetClicks)
         {
-            Destroy(gameObject);
+            DestroyObbject();
         }
 
     }
@@ -46,5 +47,14 @@ public class Explode : MonoBehaviour
             counter--;
         }
  
+    }
+
+    private void DestroyObbject()
+    {
+        if (this.gameObject != null)
+        {
+            // Insert Particle Sytem here
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }
