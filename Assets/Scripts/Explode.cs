@@ -7,7 +7,7 @@ public class Explode : MonoBehaviour
     public float targetTime = 2.0f;
     public float timer = 2.0f;
     public double targetClicks = 10;
-    // public ParticleSystem ExplosionParticleSystem;
+    public ParticleSystem DestructionEffect;
 
     private double counter = 0;
 
@@ -39,7 +39,7 @@ public class Explode : MonoBehaviour
 
     void timerEnded()
     {
-        // Wenn der Timer abläuft wird eins vom Couner abgezogen und der Timer startet neu
+        // Wenn der Timer abläuft wird eins vom Counter abgezogen und der Timer startet neu
         targetTime = timer;
 
         if (counter >= 0)
@@ -54,6 +54,20 @@ public class Explode : MonoBehaviour
         if (this.gameObject != null)
         {
             // Insert Particle Sytem here
+
+
+
+            //Instantiate our one-off particle system
+            ParticleSystem explosionEffect = Instantiate(DestructionEffect) as ParticleSystem;
+
+            explosionEffect.transform.position = transform.position;
+            //play it
+            explosionEffect.loop = false;
+            explosionEffect.Play();
+
+            //destroy the particle system when its duration is up, right
+            //it would play a second time.
+            Destroy(explosionEffect.gameObject, explosionEffect.duration);
             GameObject.Destroy(this.gameObject);
         }
     }
