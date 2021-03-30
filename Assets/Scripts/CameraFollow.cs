@@ -11,9 +11,17 @@ public class CameraFollow : MonoBehaviour
     public float cameraMoveSpeed = 1f;
     public GameObject Boundary;
 
+    public bool enableScrolling = true;
+    public bool smoothZoom = false;
+
     private Vector3 cameraFollowPosition;
     private float boundaryX;
     private float boundaryY;
+    private float height;
+    private float width;
+    private float zoom;
+
+    private Camera cam;
 
     void Start()
     {
@@ -21,11 +29,14 @@ public class CameraFollow : MonoBehaviour
         Vector3 cameraFollowPosition = startScreen.transform.position;
 
         // Gets the height and with of the Background Image
-        float width = Boundary.GetComponent<SpriteRenderer>().bounds.size.x;
-        float height = Boundary.GetComponent<SpriteRenderer>().bounds.size.y;
+        width = Boundary.GetComponent<SpriteRenderer>().bounds.size.x;
+        height = Boundary.GetComponent<SpriteRenderer>().bounds.size.y;
 
         boundaryX = (width / 2) - (Screen.width / 2);
-        boundaryY = height / 2 - (Screen.height / 2);
+        boundaryY = (height / 2) - (Screen.height / 2);
+
+        cam = Camera.main;
+        zoom = cam.orthographicSize;
 
     }
 
@@ -80,6 +91,36 @@ public class CameraFollow : MonoBehaviour
             transform.position = newCameraPosition;
 
         }
+
+        
+        if (enableScrolling == true)
+        {
+            float zoomChangeAmount = 800f;
+
+            zoom = Mathf.Clamp(zoom, startScreen.GetComponent<SpriteRenderer>().bounds.size.x / 6f, height / 6f);
+
+            if (Input.mouseScrollDelta.y > 0)
+            {
+                zoom -= zoomChangeAmount * Time.deltaTime * 10f;
+            }
+
+            if ( Input.mouseScrollDelta.y < 0)
+            {
+                zoom += zoomChangeAmount * Time.deltaTime * 10f;
+            }
+
+            if(smoothZoom == true)
+            {
+                cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoom, Time.deltaTime);
+
+            } else
+            {
+                cam.orthographicSize = zoom;
+            }
+            
+
+        }
+        
        
     }
 }
