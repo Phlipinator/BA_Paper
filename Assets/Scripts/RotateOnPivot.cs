@@ -35,6 +35,7 @@ public class RotateOnPivot : MonoBehaviour
             Vector3 v3 = Input.mousePosition - screenPos;
             float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
+            DataScript.interactionMade = true;
 
         }
 

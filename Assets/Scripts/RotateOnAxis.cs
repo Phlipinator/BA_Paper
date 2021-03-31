@@ -43,16 +43,16 @@ public class RotateOnAxis : MonoBehaviour
             if(rotateOnY == true)
             {
                 transform.eulerAngles = new Vector3(0, angle + angleOffset, 0);
+                DataScript.interactionMade = true;
             } else
             {
                 transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
+                DataScript.interactionMade = true;
             }
             
             
 
         }
-
-
 
         /*
          * Note to Self:

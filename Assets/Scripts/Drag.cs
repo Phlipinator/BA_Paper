@@ -76,11 +76,13 @@ public class Drag : MonoBehaviour
                 {
                     if ((mousePos.x - startPosX) > orgPosX)
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
+                        DataScript.interactionMade = true;
 
                 } else {
 
                     if ((mousePos.x - startPosX) < orgPosX)
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
+                        DataScript.interactionMade = true;
                 }
 
             }
@@ -94,6 +96,7 @@ public class Drag : MonoBehaviour
                 {
                     if ((mousePos.y - startPosY) > orgPosY)
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+                        DataScript.interactionMade = true;
 
                 }
                 else
@@ -101,6 +104,7 @@ public class Drag : MonoBehaviour
 
                     if ((mousePos.y - startPosY) < orgPosY)
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+                        DataScript.interactionMade = true;
                 }
                 
             }

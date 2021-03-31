@@ -31,6 +31,7 @@ public class Explode : MonoBehaviour
         if (counter >= targetClicks)
         {
             DestroyObbject();
+            DataScript.interactionMade = true;
         }
 
     }
@@ -53,9 +54,9 @@ public class Explode : MonoBehaviour
     {
         if (this.gameObject != null)
         {
-            // Insert Particle Sytem here
 
             GameObject.Destroy(this.gameObject);
+            DestructionEffect.Play();
         }
     }
 }

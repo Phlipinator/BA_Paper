@@ -25,6 +25,7 @@ public class Spin : MonoBehaviour
         if (coroutineAllowed)
         {
             StartCoroutine(RotateCard());
+            DataScript.interactionMade = true;
         }
     }
 
