@@ -10861,7 +10861,7 @@ MonoBehaviour:
   Five: {fileID: 1984203369}
   interactables: 5
   ps: {fileID: 713359063}
-  cam: {fileID: 0}
+  cam: {fileID: 519420031}
 --- !u!4 &2001709558
 Transform:
   m_ObjectHideFlags: 0
