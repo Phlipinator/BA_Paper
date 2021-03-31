@@ -19,6 +19,8 @@ public class Drag : MonoBehaviour
     public bool moveRight;
     public bool moveUp;
     public bool fixPosition;
+
+    public GameObject hintPosition;
    
     void Start()
     {
@@ -76,13 +78,20 @@ public class Drag : MonoBehaviour
                 {
                     if ((mousePos.x - startPosX) > orgPosX)
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
+
+
+                        //Hint System interaction here
                         DataScript.interactionMade = true;
+                        GameObject.Destroy(hintPosition);
 
                 } else {
 
                     if ((mousePos.x - startPosX) < orgPosX)
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
+
+                        //Hint System interaction here
                         DataScript.interactionMade = true;
+                        GameObject.Destroy(hintPosition);
                 }
 
             }
@@ -96,7 +105,10 @@ public class Drag : MonoBehaviour
                 {
                     if ((mousePos.y - startPosY) > orgPosY)
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+
+                        //Hint System interaction here
                         DataScript.interactionMade = true;
+                        GameObject.Destroy(hintPosition);
 
                 }
                 else
@@ -104,7 +116,10 @@ public class Drag : MonoBehaviour
 
                     if ((mousePos.y - startPosY) < orgPosY)
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+
+                        //Hint System interaction here
                         DataScript.interactionMade = true;
+                        GameObject.Destroy(hintPosition);
                 }
                 
             }

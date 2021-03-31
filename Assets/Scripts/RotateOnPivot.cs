@@ -10,6 +10,8 @@ public class RotateOnPivot : MonoBehaviour
 
     private bool isBeingHeld = false;
 
+    public GameObject hintPosition;
+
     void Start()
     {
         myCam = Camera.main;
@@ -35,9 +37,11 @@ public class RotateOnPivot : MonoBehaviour
             Vector3 v3 = Input.mousePosition - screenPos;
             float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
-            DataScript.interactionMade = true;
 
-        }
+            DataScript.interactionMade = true;
+            GameObject.Destroy(hintPosition);
+
+}
 
 
 

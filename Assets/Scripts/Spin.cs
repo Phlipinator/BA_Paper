@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
+    public GameObject hintPosition;
+
     private SpriteRenderer rend;
 
     [SerializeField]
@@ -25,7 +27,10 @@ public class Spin : MonoBehaviour
         if (coroutineAllowed)
         {
             StartCoroutine(RotateCard());
+
+            //Hint System interaction here
             DataScript.interactionMade = true;
+            GameObject.Destroy(hintPosition);
         }
     }
 

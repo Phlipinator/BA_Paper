@@ -9,6 +9,8 @@ public class Explode : MonoBehaviour
     public double targetClicks = 10;
     public ParticleSystem DestructionEffect;
 
+    public GameObject hintPosition;
+
     private double counter = 0;
 
 
@@ -31,7 +33,10 @@ public class Explode : MonoBehaviour
         if (counter >= targetClicks)
         {
             DestroyObbject();
+
+            //Hint System interaction here
             DataScript.interactionMade = true;
+            GameObject.Destroy(hintPosition);
         }
 
     }
