@@ -12,14 +12,18 @@ public class HintSystem : MonoBehaviour
     public GameObject One;
     public GameObject Two;
     public GameObject Three;
+    public GameObject Four;
+    public GameObject Five;
 
-    public int interactables = 3;
+    public int interactables = 5;
 
     public ParticleSystem ps;
 
     private Vector2 OnePos;
     private Vector2 TwoPos;
     private Vector2 ThreePos;
+    private Vector2 FourPos;
+    private Vector2 FivePos;
 
     private Vector2[] vecArray;
 
@@ -32,12 +36,16 @@ public class HintSystem : MonoBehaviour
         OnePos = One.transform.position;
         TwoPos = Two.transform.position;
         ThreePos = Three.transform.position;
+        FourPos = Four.transform.position;
+        FivePos = Five.transform.position;
 
         vecArray = new Vector2[]
         {
             OnePos,
             TwoPos,
             ThreePos,
+            FourPos,
+            FivePos
         };
     }
 
