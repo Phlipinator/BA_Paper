@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286d80567bb32347b01b2f8e97f6a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hintPosition: {fileID: 1252117130}
 --- !u!1 &162300151
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,11 +395,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScreen: {fileID: 1818950744}
-  moveAmount: 100
+  moveAmount: 0.75
   edgeSize: 30
   cameraMoveSpeed: 5
   Boundary: {fileID: 2116079575}
-  enableScrolling: 0
+  enableScrolling: 1
   smoothZoom: 0
 --- !u!20 &519420031
 Camera:
@@ -5359,6 +5360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateOnY: 1
+  hintPosition: {fileID: 1984203369}
 --- !u!61 &746556821
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5541,6 +5543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27166ceb03ff626429cc2bb82e37a16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hintPosition: {fileID: 162300151}
   faceSprite: {fileID: 3609959554996883812, guid: 0ab34c0fc09730f42a240e8486f752fc, type: 3}
   backSprite: {fileID: -4457850898058260020, guid: 0ab34c0fc09730f42a240e8486f752fc, type: 3}
 --- !u!212 &1433467392
@@ -5669,6 +5672,7 @@ MonoBehaviour:
   timer: 6
   targetClicks: 10
   DestructionEffect: {fileID: 1702206991}
+  hintPosition: {fileID: 1831360697}
 --- !u!212 &1620026860
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10789,6 +10793,7 @@ MonoBehaviour:
   moveRight: 1
   moveUp: 0
   fixPosition: 1
+  hintPosition: {fileID: 906687939}
 --- !u!1 &1984203369
 GameObject:
   m_ObjectHideFlags: 0
@@ -10856,6 +10861,7 @@ MonoBehaviour:
   Five: {fileID: 1984203369}
   interactables: 5
   ps: {fileID: 713359063}
+  cam: {fileID: 519420031}
 --- !u!4 &2001709558
 Transform:
   m_ObjectHideFlags: 0
@@ -11046,7 +11052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116079575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.6, y: -21.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4000, y: 4000, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

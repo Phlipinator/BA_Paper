@@ -15,6 +15,8 @@ public class RotateOnAxis : MonoBehaviour
 
     public bool rotateOnY = true;
 
+    public GameObject hintPosition;
+
     void Start()
     {
         myCam = Camera.main;
@@ -43,11 +45,17 @@ public class RotateOnAxis : MonoBehaviour
             if(rotateOnY == true)
             {
                 transform.eulerAngles = new Vector3(0, angle + angleOffset, 0);
+
+                //Hint System interaction here
                 DataScript.interactionMade = true;
+                GameObject.Destroy(hintPosition);
             } else
             {
                 transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
+
+                //Hint System interaction here
                 DataScript.interactionMade = true;
+                GameObject.Destroy(hintPosition);
             }
             
             

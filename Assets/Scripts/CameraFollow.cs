@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject startScreen;
-    public float moveAmount = 1f;
+    public float moveAmount = 0.01f;
     public float edgeSize = 10f;
     public float cameraMoveSpeed = 1f;
     public GameObject Boundary;
@@ -21,6 +21,8 @@ public class CameraFollow : MonoBehaviour
     private float width;
     private float zoom;
 
+    private float aspect;
+
     private Camera cam;
 
     void Start()
@@ -32,46 +34,54 @@ public class CameraFollow : MonoBehaviour
         width = Boundary.GetComponent<SpriteRenderer>().bounds.size.x;
         height = Boundary.GetComponent<SpriteRenderer>().bounds.size.y;
 
-        boundaryX = (width / 2) - (Screen.width / 2);
-        boundaryY = (height / 2) - (Screen.height / 2);
-
         cam = Camera.main;
         zoom = cam.orthographicSize;
+
+        aspect = cam.aspect;
 
     }
 
     void Update()
     {
-       
-            // move to the right
-            if ((Input.mousePosition.x > Screen.width - edgeSize) && cameraFollowPosition.x < boundaryX)
-            {
-                cameraFollowPosition.x += moveAmount * Time.deltaTime;
-            }
+        float camWidth = zoom * aspect * 2;
+        float camHeight = zoom * 2;
 
-            // move to the left
-            if ((Input.mousePosition.x < edgeSize) && cameraFollowPosition.x > -boundaryX)
-            {
-                cameraFollowPosition.x -= moveAmount * Time.deltaTime;
-            }
+        float dynamicMoveAmount = moveAmount * Time.deltaTime * zoom;
 
-            // move up
-            if ((Input.mousePosition.y > Screen.height - edgeSize) && cameraFollowPosition.y < boundaryY)
-            {
-                cameraFollowPosition.y += moveAmount * Time.deltaTime;
-            }
+        boundaryX = (width / 2) - (camWidth / 2) ;
+        boundaryY = (height / 2) - (camHeight / 2);
+        
+        // Debug.LogFormat("BX: {0} BY: {1} CX: {2} CY: {3}", boundaryX, boundaryY, cameraFollowPosition.x, cameraFollowPosition.y);
 
-            // move down
-            if ((Input.mousePosition.y < edgeSize) && cameraFollowPosition.y > -boundaryY)
-            {
-                cameraFollowPosition.y -= moveAmount * Time.deltaTime;
-            }
+        // move to the right
+        if ((Input.mousePosition.x > Screen.width - edgeSize) && cameraFollowPosition.x < boundaryX)
+        {
+            cameraFollowPosition.x += dynamicMoveAmount;
+        }
 
-       
+        // move to the left
+        if ((Input.mousePosition.x < edgeSize) && cameraFollowPosition.x > -boundaryX)
+        {
+            cameraFollowPosition.x -= dynamicMoveAmount;
+        }
+
+        // move up
+        if ((Input.mousePosition.y > Screen.height - edgeSize) && cameraFollowPosition.y < boundaryY)
+        {
+            cameraFollowPosition.y += dynamicMoveAmount;
+        }
+
+        // move down
+        if ((Input.mousePosition.y < edgeSize) && cameraFollowPosition.y > -boundaryY)
+        {
+            cameraFollowPosition.y -= dynamicMoveAmount;
+        }
+
+
 
         //Sets a static value for z, because we dont need it in 2D
         cameraFollowPosition.z = transform.position.z;
-        
+
         Vector3 cameraMoveDir = (cameraFollowPosition - transform.position).normalized;
         float distance = Vector3.Distance(cameraFollowPosition, transform.position);
 
@@ -92,7 +102,7 @@ public class CameraFollow : MonoBehaviour
 
         }
 
-        
+
         if (enableScrolling == true)
         {
             float zoomChangeAmount = 800f;
@@ -104,23 +114,23 @@ public class CameraFollow : MonoBehaviour
                 zoom -= zoomChangeAmount * Time.deltaTime * 10f;
             }
 
-            if ( Input.mouseScrollDelta.y < 0)
+            if (Input.mouseScrollDelta.y < 0)
             {
                 zoom += zoomChangeAmount * Time.deltaTime * 10f;
             }
 
-            if(smoothZoom == true)
+            if (smoothZoom == true)
             {
                 cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoom, Time.deltaTime);
-
-            } else
+            }
+            else
             {
                 cam.orthographicSize = zoom;
             }
-            
+
 
         }
-        
-       
+
+
     }
 }

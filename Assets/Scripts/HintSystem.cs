@@ -18,14 +18,11 @@ public class HintSystem : MonoBehaviour
     public int interactables = 5;
 
     public ParticleSystem ps;
+    public Camera cam;
 
-    private Vector2 OnePos;
-    private Vector2 TwoPos;
-    private Vector2 ThreePos;
-    private Vector2 FourPos;
-    private Vector2 FivePos;
-
-    private Vector2[] vecArray;
+    private GameObject[] objectArray;
+    private List<Vector2> vecList;
+    private List<Vector2> vecListNew;
 
 
 
@@ -33,48 +30,74 @@ public class HintSystem : MonoBehaviour
     {
         timer = targetTime;
 
-        OnePos = One.transform.position;
-        TwoPos = Two.transform.position;
-        ThreePos = Three.transform.position;
-        FourPos = Four.transform.position;
-        FivePos = Five.transform.position;
-
-        vecArray = new Vector2[]
+        objectArray = new GameObject[]
         {
-            OnePos,
-            TwoPos,
-            ThreePos,
-            FourPos,
-            FivePos
+            One,
+            Two,
+            Three,
+            Four,
+            Five
+           // Rest go here
         };
+
+        vecList = new List<Vector2>();
+        vecListNew = new List<Vector2>();
+
+        cam = UnityEngine.Camera.main;
     }
 
     void Update()
     {
+        //TODO: Check if lists are empty!!!!
+
+
+        vecList.Clear();
+        vecListNew.Clear();
+
+        // Checks if interactable still exists and puts it in a new list if it does
+        foreach (GameObject i in objectArray)
+        {
+            if (i != null)
+            {
+                // If Interactable has been interacted with it should destroy its position Object making it equal to null
+                vecList.Add(i.transform.position);
+                //vecList now contains a List of the Positions of all interactables that have not been destroyed yet
+            }
+        }
+
+        
+        // Checks if the interatable can be seen by the camera
+        foreach (Vector2 j in vecList)
+        {
+            Vector3 current3 = new Vector3(j.x, j.y, 0f);
+            Vector3 screenPoint = cam.WorldToViewportPoint(current3);
+
+            if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1)
+            {
+                vecListNew.Add(j);
+            }
+        }
+        
+
 
         targetTime -= Time.deltaTime;
 
         if (targetTime <= 0.0f)
         {
-            timerEnded();
+            TimerEnded();
         }
     }
 
-    void timerEnded()
+    void TimerEnded()
     {
         //Starts Timer again
         targetTime = timer;
+   
 
-        if (DataScript.interactionMade == false)
+        if (DataScript.interactionMade == false && !vecListNew.Count.Equals(0))
         {
-            
 
-            int display = Random.Range(1, interactables);
-
-            showHint(display);
-
-            Debug.Log("Show Hint " + display);
-
+            showHint();
 
         } else {
 
@@ -83,14 +106,15 @@ public class HintSystem : MonoBehaviour
 
     }
 
-    void showHint(int display)
+    void showHint()
     {
-        Vector2 selected = vecArray[display];
+        int display = Random.Range(0, vecListNew.Count - 1);
+        Vector2 selected = vecListNew[display];
         ps.transform.position = selected;
         ps.Play();
 
-        Debug.Log("I am here");
-
+        Debug.Log("Showing Hint at: " + display);
 
     }
+
 }
