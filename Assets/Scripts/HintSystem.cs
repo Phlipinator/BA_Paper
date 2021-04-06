@@ -97,7 +97,7 @@ public class HintSystem : MonoBehaviour
         if (DataScript.interactionMade == false && !vecListNew.Count.Equals(0))
         {
 
-            showHint();
+            ShowHint();
 
         } else {
 
@@ -106,7 +106,7 @@ public class HintSystem : MonoBehaviour
 
     }
 
-    void showHint()
+    void ShowHint()
     {
         int display = Random.Range(0, vecListNew.Count - 1);
         Vector2 selected = vecListNew[display];

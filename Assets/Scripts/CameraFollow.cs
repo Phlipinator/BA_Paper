@@ -78,6 +78,31 @@ public class CameraFollow : MonoBehaviour
         }
 
 
+        // correct cam placement RIGHT
+        if (cameraFollowPosition.x > boundaryX)
+        {
+            cameraFollowPosition.x = boundaryX;
+        }
+
+        // correct cam placment LEFT
+        if (cameraFollowPosition.x < -boundaryX)
+        {
+            cameraFollowPosition.x = -boundaryX;
+        }
+
+        // correct cam placement UP
+        if (cameraFollowPosition.y > boundaryY)
+        {
+            cameraFollowPosition.y = boundaryY;
+        }
+
+        // correct cam placement DOWN
+        if (cameraFollowPosition.y < -boundaryY)
+        {
+            cameraFollowPosition.y = -boundaryY;
+        }
+
+
 
         //Sets a static value for z, because we dont need it in 2D
         cameraFollowPosition.z = transform.position.z;
