@@ -40,9 +40,10 @@ public class RotateOnAxis : MonoBehaviour
         {
 
             Vector3 v3 = Input.mousePosition - screenPos;
+            //float angle = Mathf.Clamp(Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg, 0, 180);
             float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
 
-            if(rotateOnY == true)
+            if (rotateOnY == true)
             {
                 transform.eulerAngles = new Vector3(0, angle + angleOffset, 0);
 

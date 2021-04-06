@@ -12,16 +12,28 @@ public class Explode : MonoBehaviour
     public GameObject hintPosition;
 
     private double counter = 0;
+    private float opacity = Mathf.Clamp(1, 0, 1);
+    Color color;
+    
 
+    private void Start()
+    {
+        color = this.gameObject.GetComponent<Renderer>().material.color;
+    }
 
     void OnMouseDown()
     {
         // Counter wird für jeden Klick eins hochgezählt
         counter++;
+        opacity -= 0.1f;
     }
 
     void Update()
     {
+
+        color.a = opacity;
+        this.gameObject.GetComponent<Renderer>().material.color = color;
+
 
         targetTime -= Time.deltaTime;
 
@@ -42,7 +54,6 @@ public class Explode : MonoBehaviour
     }
 
 
-
     void timerEnded()
     {
         // Wenn der Timer abläuft wird eins vom Counter abgezogen und der Timer startet neu
@@ -51,6 +62,7 @@ public class Explode : MonoBehaviour
         if (counter >= 0)
         {
             counter--;
+            opacity += 0.1f;
         }
  
     }
