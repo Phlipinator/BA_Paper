@@ -8,6 +8,7 @@ public class Explode : MonoBehaviour
     public float timer = 2.0f;
     public double targetClicks = 10;
     public ParticleSystem DestructionEffect;
+    public bool changeOpacity = false;
 
     public GameObject hintPosition;
 
@@ -30,9 +31,11 @@ public class Explode : MonoBehaviour
 
     void Update()
     {
-
-        color.a = opacity;
-        this.gameObject.GetComponent<Renderer>().material.color = color;
+        if (changeOpacity == true)
+        {
+            color.a = opacity;
+            this.gameObject.GetComponent<Renderer>().material.color = color;
+        }
 
 
         targetTime -= Time.deltaTime;

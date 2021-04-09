@@ -14,6 +14,9 @@ public class CameraFollow : MonoBehaviour
     public bool enableScrolling = true;
     public bool smoothZoom = false;
 
+    public float minZoom = 250;
+    public float maxZoom = 500;
+
     private Vector3 cameraFollowPosition;
     private float boundaryX;
     private float boundaryY;
@@ -132,7 +135,7 @@ public class CameraFollow : MonoBehaviour
         {
             float zoomChangeAmount = 800f;
 
-            zoom = Mathf.Clamp(zoom, startScreen.GetComponent<SpriteRenderer>().bounds.size.x / 6f, height / 6f);
+            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
 
             if (Input.mouseScrollDelta.y > 0)
             {

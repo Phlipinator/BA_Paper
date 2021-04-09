@@ -45,21 +45,30 @@ public class RotateOnAxis : MonoBehaviour
 
             if (rotateOnY == true)
             {
+
+                Debug.Log(angle + angleOffset);
+
                 transform.eulerAngles = new Vector3(0, angle + angleOffset, 0);
 
-                //Hint System interaction here
-                DataScript.interactionMade = true;
-                GameObject.Destroy(hintPosition);
-            } else
-            {
-                transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
 
                 //Hint System interaction here
                 DataScript.interactionMade = true;
                 GameObject.Destroy(hintPosition);
             }
-            
-            
+            else
+            {
+
+                Debug.Log((angle + angleOffset) * Mathf.Rad2Deg);
+
+                transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
+
+
+                //Hint System interaction here
+                DataScript.interactionMade = true;
+                GameObject.Destroy(hintPosition);
+            }
+
+
 
         }
 
