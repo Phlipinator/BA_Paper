@@ -13,14 +13,16 @@ public class Explode : MonoBehaviour
     public GameObject hintPosition;
 
     private double counter = 0;
-    private float opacity = Mathf.Clamp(1, 0, 1);
+    private float opacity;
     Color color;
     
 
     private void Start()
     {
         color = this.gameObject.GetComponent<Renderer>().material.color;
-    }
+
+        opacity = Mathf.Clamp(color.a, 0, color.a);
+}
 
     void OnMouseDown()
     {
