@@ -10,6 +10,10 @@ public class Explode : MonoBehaviour
     public ParticleSystem DestructionEffect;
     public bool changeOpacity = false;
 
+    public bool makeSound = true;
+    public GameObject soundManager;
+    private AudioSource sound;
+
     public GameObject hintPosition;
 
     private double counter = 0;
@@ -22,7 +26,9 @@ public class Explode : MonoBehaviour
         color = this.gameObject.GetComponent<Renderer>().material.color;
 
         opacity = Mathf.Clamp(color.a, 0, color.a);
-}
+        sound = soundManager.GetComponent<AudioSource>();
+
+    }
 
     void OnMouseDown()
     {
@@ -74,11 +80,14 @@ public class Explode : MonoBehaviour
 
     private void DestroyObbject()
     {
+
         if (this.gameObject != null)
         {
-
+           
             GameObject.Destroy(this.gameObject);
             DestructionEffect.Play();
+            sound.Play();
+          
         }
     }
 }

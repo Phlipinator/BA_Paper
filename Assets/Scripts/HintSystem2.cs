@@ -20,9 +20,6 @@ public class HintSystem2 : MonoBehaviour
     public GameObject Nine;
     public GameObject Ten;
 
-
-    public int interactables = 5;
-
     public ParticleSystem ps;
     public Camera cam;
 
