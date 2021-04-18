@@ -17,7 +17,7 @@ public class Explode : MonoBehaviour
     public GameObject hintPosition;
 
     private double counter = 0;
-    private float opacity;
+    private float opacity = Mathf.Clamp(1, 0, 1);
     Color color;
     
 
@@ -25,7 +25,6 @@ public class Explode : MonoBehaviour
     {
         color = this.gameObject.GetComponent<Renderer>().material.color;
 
-        opacity = Mathf.Clamp(color.a, 0, color.a);
         sound = soundManager.GetComponent<AudioSource>();
 
     }
@@ -73,7 +72,12 @@ public class Explode : MonoBehaviour
         if (counter >= 0)
         {
             counter--;
-            opacity += 0.1f;
+
+            if (opacity < 1)
+            {
+                opacity += 0.1f;
+            }
+            
         }
  
     }
