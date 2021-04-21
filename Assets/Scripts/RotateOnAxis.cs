@@ -40,25 +40,35 @@ public class RotateOnAxis : MonoBehaviour
         {
 
             Vector3 v3 = Input.mousePosition - screenPos;
+            //float angle = Mathf.Clamp(Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg, 0, 180);
             float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
 
-            if(rotateOnY == true)
+            if (rotateOnY == true)
             {
+
+                Debug.Log(angle + angleOffset);
+
                 transform.eulerAngles = new Vector3(0, angle + angleOffset, 0);
 
-                //Hint System interaction here
-                DataScript.interactionMade = true;
-                GameObject.Destroy(hintPosition);
-            } else
-            {
-                transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
 
                 //Hint System interaction here
                 DataScript.interactionMade = true;
                 GameObject.Destroy(hintPosition);
             }
-            
-            
+            else
+            {
+
+                Debug.Log((angle + angleOffset) * Mathf.Rad2Deg);
+
+                transform.eulerAngles = new Vector3(angle + angleOffset, 0, 0);
+
+
+                //Hint System interaction here
+                DataScript.interactionMade = true;
+                GameObject.Destroy(hintPosition);
+            }
+
+
 
         }
 

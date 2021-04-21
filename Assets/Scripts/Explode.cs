@@ -8,20 +8,42 @@ public class Explode : MonoBehaviour
     public float timer = 2.0f;
     public double targetClicks = 10;
     public ParticleSystem DestructionEffect;
+    public bool changeOpacity = false;
+
+    public bool makeSound = true;
+    public GameObject soundManager;
+    private AudioSource sound;
 
     public GameObject hintPosition;
 
     private double counter = 0;
+    private float opacity = Mathf.Clamp(1, 0, 1);
+    Color color;
+    
 
+    private void Start()
+    {
+        color = this.gameObject.GetComponent<Renderer>().material.color;
+
+        sound = soundManager.GetComponent<AudioSource>();
+
+    }
 
     void OnMouseDown()
     {
         // Counter wird für jeden Klick eins hochgezählt
         counter++;
+        opacity -= 0.1f;
     }
 
     void Update()
     {
+        if (changeOpacity == true)
+        {
+            color.a = opacity;
+            this.gameObject.GetComponent<Renderer>().material.color = color;
+        }
+
 
         targetTime -= Time.deltaTime;
 
@@ -32,7 +54,7 @@ public class Explode : MonoBehaviour
 
         if (counter >= targetClicks)
         {
-            DestroyObbject();
+            DestroyObject();
 
             //Hint System interaction here
             DataScript.interactionMade = true;
@@ -40,7 +62,6 @@ public class Explode : MonoBehaviour
         }
 
     }
-
 
 
     void timerEnded()
@@ -51,17 +72,26 @@ public class Explode : MonoBehaviour
         if (counter >= 0)
         {
             counter--;
+
+            if (opacity < 1)
+            {
+                opacity += 0.1f;
+            }
+            
         }
  
     }
 
-    private void DestroyObbject()
+    private void DestroyObject()
     {
+
         if (this.gameObject != null)
         {
-
+           
             GameObject.Destroy(this.gameObject);
             DestructionEffect.Play();
+            sound.Play();
+          
         }
     }
 }

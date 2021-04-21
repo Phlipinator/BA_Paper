@@ -48,9 +48,7 @@ public class HintSystem : MonoBehaviour
 
     void Update()
     {
-        //TODO: Check if lists are empty!!!!
-
-
+ 
         vecList.Clear();
         vecListNew.Clear();
 
@@ -94,6 +92,7 @@ public class HintSystem : MonoBehaviour
         targetTime = timer;
    
 
+        // if no interaction was made and the list of possible interactions is not empty show a hint
         if (DataScript.interactionMade == false && !vecListNew.Count.Equals(0))
         {
 
