@@ -54,7 +54,7 @@ public class Explode : MonoBehaviour
 
         if (counter >= targetClicks)
         {
-            DestroyObbject();
+            DestroyObject();
 
             //Hint System interaction here
             DataScript.interactionMade = true;
@@ -82,7 +82,7 @@ public class Explode : MonoBehaviour
  
     }
 
-    private void DestroyObbject()
+    private void DestroyObject()
     {
 
         if (this.gameObject != null)

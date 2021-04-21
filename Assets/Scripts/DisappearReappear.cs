@@ -7,7 +7,7 @@ public class DisappearReappear : MonoBehaviour
     public GameObject disappear;
     public GameObject appear;
 
-    public float speed = 0.0005f;
+    public float speed = 0.005f;
 
     private bool hasBeenActivated = false;
     private bool activate = false;
@@ -38,8 +38,10 @@ public class DisappearReappear : MonoBehaviour
 
         if (activate == true && hasBeenActivated == false)
         {
+            
             if(opacityOne >= 0)
             {
+
                 opacityOne -= speed;
 
             }
@@ -52,7 +54,7 @@ public class DisappearReappear : MonoBehaviour
             }
             
 
-           if(opacityTwo <= 1)
+           if(opacityTwo >= 1)
             {
                 hasBeenActivated = true;
             }
