@@ -6,10 +6,10 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject startScreen;
+    public GameObject Boundary;
     public float moveAmount = 0.01f;
     public float edgeSize = 10f;
     public float cameraMoveSpeed = 1f;
-    public GameObject Boundary;
 
     public bool enableScrolling = true;
     public bool smoothZoom = false;
@@ -41,6 +41,8 @@ public class CameraFollow : MonoBehaviour
         zoom = cam.orthographicSize;
 
         aspect = cam.aspect;
+
+        cam.transform.position = new Vector3(startScreen.transform.position.x, startScreen.transform.position.y, -10f);
 
     }
 
@@ -126,7 +128,7 @@ public class CameraFollow : MonoBehaviour
                 newCameraPosition = cameraFollowPosition;
             }
 
-            transform.position = newCameraPosition;
+            cam.transform.position = newCameraPosition;
 
         }
 

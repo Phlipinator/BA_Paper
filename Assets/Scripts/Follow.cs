@@ -41,7 +41,7 @@ public class Follow : MonoBehaviour
 
         targetTime -= Time.deltaTime;
 
-        Debug.Log(targetTime);
+        //Debug.Log(targetTime);
 
         if (targetTime <= 0)
         {
