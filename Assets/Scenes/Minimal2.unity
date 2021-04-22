@@ -1106,11 +1106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ec0d9de84c07b4f84ea9f1e16eb07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScreen: {fileID: 1452518353}
+  startScreen: {fileID: 295913724}
   Boundary: {fileID: 1284963156}
   moveAmount: 0.75
   edgeSize: 30
-  cameraMoveSpeed: 5
+  cameraMoveSpeed: 300
   enableScrolling: 1
   smoothZoom: 0
   minZoom: 250
@@ -14144,7 +14144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677984997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1660.065, y: -697.0459, z: 900.12494}
+  m_LocalPosition: {x: -469, y: -681, z: 900.12494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31637819}
@@ -20433,7 +20433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842316705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.93512, y: -624.0459, z: 900.12494}
+  m_LocalPosition: {x: 1113, y: -638, z: 900.12494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31637819}
