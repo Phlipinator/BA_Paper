@@ -30,14 +30,14 @@ public class Appear : MonoBehaviour
 
         if (activate == true && hasBeenActivated == false)
         {
-            if (opacity >= 0)
+            if (opacity <= 1)
             {
                 opacity += speed;
 
             }
 
 
-            if (opacity <= 0)
+            if (opacity >= 1)
             {
                 hasBeenActivated = true;
             }

@@ -5,12 +5,10 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     public GameObject waveOne;
-    public GameObject waveTwo;
     public float speed = 0.1f;
     public float maxSize = 500f;
-    public float timer = 0.5f;
+   
 
-    private float targetTime;
     private Vector3 speedVec;
     private Vector3 newPos;
     private Vector3 orgSize;
@@ -25,10 +23,8 @@ public class Waves : MonoBehaviour
         newPos = waveOne.transform.position;
         orgSize = waveOne.transform.localScale;
 
-        targetTime = timer;
-
         waveOne.SetActive(false);
-        waveTwo.SetActive(false);
+        
         
 
     }
@@ -38,26 +34,15 @@ public class Waves : MonoBehaviour
     {
    
         waveOne.transform.position = newPos;
-        waveTwo.transform.position = newPos;
 
         newPos.x = this.gameObject.transform.position.x;
 
 
         if (activate == true)
         {
-            targetTime -= Time.deltaTime;
 
             makeWave(waveOne);
 
-            if (targetTime <= 0)
-            {
-                Debug.Log("I am here");
-
-                targetTime = timer;
-                makeWave(waveTwo);
-            }
-            
-            
         }
     }
 
@@ -70,9 +55,7 @@ public class Waves : MonoBehaviour
     {
         activate = false;
         waveOne.SetActive(false);
-        waveTwo.SetActive(false);
         waveOne.transform.localScale = orgSize;
-        waveTwo.transform.localScale = orgSize;
 
     }
 
