@@ -12,17 +12,14 @@ public class CameraFollow : MonoBehaviour
     public float cameraMoveSpeed = 1f;
 
     public bool enableScrolling = true;
-    public bool smoothZoom = false;
 
     public float minZoom = 250;
     public float maxZoom = 500;
 
-    private Vector3 cameraFollowPosition;
     private float boundaryX;
     private float boundaryY;
     private float height;
     private float width;
-    private float zoom;
 
     private bool activateMouseMovement = false;
 
@@ -34,15 +31,13 @@ public class CameraFollow : MonoBehaviour
     {
         cam = Camera.main;
 
-        zoom = cam.orthographicSize;
-
         aspect = cam.aspect;
 
 
         //initialize the starting position of the camera
-        Vector2 cameraFollowPosition = new Vector2(startScreen.transform.position.x, startScreen.transform.position.y);
-        cam.transform.position = new Vector3(cameraFollowPosition.x, cameraFollowPosition.y, -10f);
-        
+        Vector2 camInitPos = new Vector2(startScreen.transform.position.x, startScreen.transform.position.y);
+        SetCamPos(camInitPos);
+
 
         // Gets the height and with of the Background Image
         width = Boundary.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -50,53 +45,75 @@ public class CameraFollow : MonoBehaviour
 
     }
 
+    Vector2 SetCamPos(Vector2 pos)
+    {
+        cam.transform.position = new Vector3(pos.x, pos.y, -10);
+
+        return GetCamPos();
+    }
+
+    private Vector2 GetCamPos()
+    {
+        return new Vector2(cam.transform.position.x, cam.transform.position.y);
+    }
+
+    float Zoom()
+    {
+        float zoom = cam.orthographicSize;
+
+        float zoomChangeAmount = 800f;
+
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            zoom -= zoomChangeAmount * Time.deltaTime * 10f;
+        }
+
+        if (Input.mouseScrollDelta.y < 0)
+        {
+            zoom += zoomChangeAmount * Time.deltaTime * 10f;
+        }
+
+        return Mathf.Clamp(zoom, minZoom, maxZoom);
+    }
+
+    Vector2 ClampPosition(Vector2 pos)
+    {
+        return new Vector2(
+            Mathf.Clamp(pos.x, -boundaryX, boundaryX),
+            Mathf.Clamp(pos.y, -boundaryY, boundaryY)
+        );
+        
+    }
+
     void Update()
     {
+        Vector2 camPos = GetCamPos();
+
+        float zoom = cam.orthographicSize;
+
+        if (enableScrolling && activateMouseMovement)
+        {
+            zoom = Zoom();
+        }
 
         float camWidth = zoom * aspect * 2;
         float camHeight = zoom * 2;
 
-        float dynamicMoveAmount = moveAmount * Time.deltaTime * zoom;
 
-        boundaryX = (width / 2) - (camWidth / 2) ;
+        boundaryX = (width / 2) - (camWidth / 2);
         boundaryY = (height / 2) - (camHeight / 2);
 
-        // Debug.LogFormat("BX: {0} BY: {1} CX: {2} CY: {3}", boundaryX, boundaryY, cameraFollowPosition.x, cameraFollowPosition.y);
-
-        Vector2 mouseUnitPos = new Vector2(Input.mousePosition.x / Screen.width * 2 - 1, Input.mousePosition.y / Screen.height * 2 - 1);
-
-        Vector2 camPos2D = new Vector2(cam.transform.position.x, cam.transform.position.y);
-
-        Vector2 mouseWorldPos = mouseUnitPos + camPos2D;
+        Vector2 mouseUnitPos = new Vector2(
+            Input.mousePosition.x / Screen.width * 2 - 1,
+            Input.mousePosition.y / Screen.height * 2 - 1
+        );
 
 
-        // correct cam placement RIGHT
-        if (mouseWorldPos.x > boundaryX)
-        {
-            mouseWorldPos.x = boundaryX;
-        }
+        Vector2 mouseWorldPos = mouseUnitPos + camPos;
 
-        // correct cam placment LEFT
-        if (mouseWorldPos.x < -boundaryX)
-        {
-            mouseWorldPos.x = -boundaryX;
-        }
+        Vector2 camMoveDir = (mouseWorldPos - camPos);
 
-        // correct cam placement UP
-        if (mouseWorldPos.y > boundaryY)
-        {
-            mouseWorldPos.y = boundaryY;
-        }
-
-        // correct cam placement DOWN
-        if (mouseWorldPos.y < -boundaryY)
-        {
-            mouseWorldPos.y = -boundaryY;
-        }
-
-
-        Vector2 cameraMoveDir = (mouseWorldPos - camPos2D);
-
+       
 
         float magnitude = mouseUnitPos.magnitude;
 
@@ -116,57 +133,37 @@ public class CameraFollow : MonoBehaviour
         {
             moveFactor = 0f;
 
-        } else
+        }
+        else
         {
             float a = (magnitude - deadZoneRadius) / (1f - deadZoneRadius);
 
             moveFactor = a * a;
         }
-        
+
+        Vector2 newCamPos;
 
         if (activateMouseMovement)
         {
-            Vector3 movement = cameraMoveDir * cameraMoveSpeed * Time.deltaTime * moveFactor;
+            Vector2 movement = camMoveDir * cameraMoveSpeed * Time.deltaTime * moveFactor * zoom;
 
-        
-            cam.transform.position += movement;
 
-        } else if (!activateMouseMovement && mouseUnitPos.magnitude < deadZoneRadius)
+            newCamPos = camPos + movement;
+
+        }
+        else if (!activateMouseMovement && mouseUnitPos.magnitude < deadZoneRadius)
         {
             activateMouseMovement = true;
-        }
 
+            newCamPos = camPos;
 
-
-
-        if (enableScrolling)
+        } else
         {
-            float zoomChangeAmount = 800f;
-
-            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-
-            if (Input.mouseScrollDelta.y > 0)
-            {
-                zoom -= zoomChangeAmount * Time.deltaTime * 10f;
-            }
-
-            if (Input.mouseScrollDelta.y < 0)
-            {
-                zoom += zoomChangeAmount * Time.deltaTime * 10f;
-            }
-
-            if (smoothZoom == true)
-            {
-                cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoom, Time.deltaTime);
-            }
-            else
-            {
-                cam.orthographicSize = zoom;
-            }
-
-
+            newCamPos = camPos;
         }
 
+        SetCamPos(ClampPosition(newCamPos));
+        cam.orthographicSize = zoom;
 
     }
 }

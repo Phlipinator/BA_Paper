@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
-    public float targetTime = 2.0f;
+    
     public float timer = 2.0f;
     public double targetClicks = 10;
     public ParticleSystem DestructionEffect;
@@ -16,6 +16,7 @@ public class Explode : MonoBehaviour
 
     public GameObject hintPosition;
 
+    private float targetTime;
     private double counter = 0;
     private float opacity = Mathf.Clamp(1, 0, 1);
     Color color;
@@ -27,6 +28,7 @@ public class Explode : MonoBehaviour
 
         sound = soundManager.GetComponent<AudioSource>();
 
+        targetTime = timer;
     }
 
     void OnMouseDown()
