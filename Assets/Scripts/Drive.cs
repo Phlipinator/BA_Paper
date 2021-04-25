@@ -7,15 +7,18 @@ public class Drive : MonoBehaviour
 
     public GameObject car;
     public GameObject boundry;
+    public GameObject soundManager;
     public bool goRight = false;
     public float speed = 1;
 
     private float stopR;
     private float stopL;
     private bool activate = false;
+    private bool playSound = false;
     private Vector3 pos;
     private Vector3 newPos;
 
+    private AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,33 +32,37 @@ public class Drive : MonoBehaviour
 
         stopR = (bWidth / 2) + (cWidth / 2);
         stopL = -(bWidth / 2) - (cWidth / 2);
+
+        sound = soundManager.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (activate == true)
+        if (activate)
         {
 
             pos = car.transform.position;
 
             car.transform.position = newPos;
 
-            if (goRight == true)
+            if (goRight)
             {
                 if (newPos.x >= stopR)
                 {
                     car.SetActive(false);
-                } else
+                }
+                else
                 {
                     newPos.x += speed;
                 }
-                
 
-            } else
+
+            }
+            else
             {
-                if ( newPos.x <= stopL)
+                if (newPos.x <= stopL)
                 {
                     car.SetActive(false);
                 }
@@ -63,7 +70,7 @@ public class Drive : MonoBehaviour
                 {
                     newPos.x -= speed;
                 }
-                
+
             }
         }
     }
@@ -71,5 +78,15 @@ public class Drive : MonoBehaviour
     private void OnMouseDown()
     {
         activate = true;
+
+        if (!playSound)
+        {
+            sound.Play();
+
+            playSound = true;
+        }
+        
     }
 }
+
+   

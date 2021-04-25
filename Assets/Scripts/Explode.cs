@@ -89,8 +89,7 @@ public class Explode : MonoBehaviour
 
         if (this.gameObject != null)
         {
-           
-            GameObject.Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
             DestructionEffect.Play();
             sound.Play();
           

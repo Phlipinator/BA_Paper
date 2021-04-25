@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlaySound : MonoBehaviour
 {
-    public bool makeSound = true;
     public float timer;
     private float targetTime = 0;
     private AudioSource sound;
@@ -17,15 +16,14 @@ public class PlaySound : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (makeSound == true)
-        {
+        
             if (targetTime <= 0.0f)
             {
                 sound.Play();
                 targetTime = timer;
             }
             
-        }
+        
         
     }
 
