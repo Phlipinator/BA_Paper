@@ -13,6 +13,7 @@ public class Explode : MonoBehaviour
     public bool makeSound = true;
     public GameObject soundManager;
     private AudioSource sound;
+    private bool hasBeenActivated = false;
 
     public GameObject hintPosition;
 
@@ -57,6 +58,7 @@ public class Explode : MonoBehaviour
         if (counter >= targetClicks)
         {
             DestroyObject();
+            hasBeenActivated = true;
 
             //Hint System interaction here
             DataScript.interactionMade = true;
@@ -75,7 +77,7 @@ public class Explode : MonoBehaviour
         {
             counter--;
 
-            if (opacity < 1)
+            if (opacity < 1 && !hasBeenActivated)
             {
                 opacity += 0.1f;
             }
@@ -89,7 +91,7 @@ public class Explode : MonoBehaviour
 
         if (this.gameObject != null)
         {
-            this.gameObject.SetActive(false);
+            opacity = 0f;
             DestructionEffect.Play();
             sound.Play();
           
