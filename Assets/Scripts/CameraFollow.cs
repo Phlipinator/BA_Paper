@@ -31,7 +31,7 @@ public class CameraFollow : MonoBehaviour
     {
         cam = Camera.main;
 
-        aspect = cam.aspect;
+        
 
 
         //initialize the starting position of the camera
@@ -87,6 +87,9 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+
+        aspect = cam.aspect;
+
         Vector2 camPos = GetCamPos();
 
         float zoom = cam.orthographicSize;
@@ -102,6 +105,7 @@ public class CameraFollow : MonoBehaviour
 
         boundaryX = (width / 2) - (camWidth / 2);
         boundaryY = (height / 2) - (camHeight / 2);
+
 
         Vector2 mouseUnitPos = new Vector2(
             Input.mousePosition.x / Screen.width * 2 - 1,

@@ -20,7 +20,7 @@ public class Appear : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
         color.a = opacity;

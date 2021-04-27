@@ -120,7 +120,7 @@ public class HintSystem2 : MonoBehaviour
         ps.transform.position = selected;
         ps.Play();
 
-        Debug.Log("Showing Hint at: " + display);
+        //Debug.Log("Showing Hint at: " + display);
 
     }
 

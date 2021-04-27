@@ -30,7 +30,7 @@ public class Waves : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
    
         waveOne.transform.position = newPos;
