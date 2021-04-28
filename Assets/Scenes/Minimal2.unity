@@ -1256,7 +1256,7 @@ MonoBehaviour:
   cameraMoveSpeed: 1
   enableScrolling: 1
   minZoom: 250
-  maxZoom: 500
+  maxZoom: 800
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
