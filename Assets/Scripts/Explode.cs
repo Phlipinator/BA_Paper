@@ -11,7 +11,6 @@ public class Explode : MonoBehaviour
     public bool changeOpacity = false;
 
     public bool makeSound = true;
-    public GameObject soundManager;
     private AudioSource sound;
     private bool hasBeenActivated = false;
 
@@ -27,7 +26,7 @@ public class Explode : MonoBehaviour
     {
         color = this.gameObject.GetComponent<Renderer>().material.color;
 
-        sound = soundManager.GetComponent<AudioSource>();
+        sound = GetComponent<AudioSource>();
 
         targetTime = timer;
     }
@@ -41,7 +40,7 @@ public class Explode : MonoBehaviour
 
     void Update()
     {
-        if (changeOpacity == true)
+        if (changeOpacity)
         {
             color.a = opacity;
             this.gameObject.GetComponent<Renderer>().material.color = color;
@@ -57,6 +56,7 @@ public class Explode : MonoBehaviour
 
         if (counter >= targetClicks)
         {
+            
             DestroyObject();
             hasBeenActivated = true;
 
@@ -88,13 +88,12 @@ public class Explode : MonoBehaviour
 
     private void DestroyObject()
     {
-
-        if (this.gameObject != null)
+        if (!hasBeenActivated)
         {
             opacity = 0f;
             DestructionEffect.Play();
             sound.Play();
-          
         }
+  
     }
 }

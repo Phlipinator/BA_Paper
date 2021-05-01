@@ -11,6 +11,7 @@ public class Appear : MonoBehaviour
     private bool hasBeenActivated = false;
     private bool activate = false;
     private float opacity = 0;
+    private float threshold = 15f;
     Color color;
 
    
@@ -27,8 +28,12 @@ public class Appear : MonoBehaviour
 
         appear.GetComponent<Renderer>().material.color = color;
 
+        if ((transform.rotation.z * Mathf.Rad2Deg) >= threshold || (transform.rotation.z * Mathf.Rad2Deg) <= -threshold)
+        {
+            activate = true;
+        }
 
-        if (activate == true && hasBeenActivated == false)
+        if (activate && !hasBeenActivated)
         {
             if (opacity <= 1)
             {
@@ -43,11 +48,5 @@ public class Appear : MonoBehaviour
             }
 
         }
-    }
-
-
-    private void OnMouseDown()
-    {
-        activate = true;
     }
 }

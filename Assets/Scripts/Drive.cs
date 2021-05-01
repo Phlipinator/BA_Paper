@@ -39,6 +39,17 @@ public class Drive : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(this.gameObject.GetComponent<Renderer>().material.color.a == 0)
+        {
+            activate = true;
+
+            if (!playSound)
+            {
+                sound.Play();
+
+                playSound = true;
+            }
+        }
 
         if (activate)
         {
@@ -73,19 +84,6 @@ public class Drive : MonoBehaviour
 
             }
         }
-    }
-
-    private void OnMouseDown()
-    {
-        activate = true;
-
-        if (!playSound)
-        {
-            sound.Play();
-
-            playSound = true;
-        }
-        
     }
 }
 

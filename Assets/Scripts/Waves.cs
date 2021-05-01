@@ -33,11 +33,6 @@ public class Waves : MonoBehaviour
     void FixedUpdate()
     {
    
-        waveOne.transform.position = newPos;
-
-        newPos.x = this.gameObject.transform.position.x;
-
-
         if (activate == true)
         {
 

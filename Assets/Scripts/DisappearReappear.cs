@@ -13,6 +13,7 @@ public class DisappearReappear : MonoBehaviour
     private bool activate = false;
     private float opacityOne = 1;
     private float opacityTwo = 0;
+    private float threshold = 15;
     Color colorOne;
     Color colorTwo;
     
@@ -36,7 +37,12 @@ public class DisappearReappear : MonoBehaviour
         appear.GetComponent<Renderer>().material.color = colorTwo;
 
 
-        if (activate == true && hasBeenActivated == false)
+        if ((transform.rotation.z * Mathf.Rad2Deg) >= threshold || (transform.rotation.z * Mathf.Rad2Deg) <= -threshold)
+        {
+            activate = true;
+        }
+
+        if (activate && !hasBeenActivated)
         {
             
             if(opacityOne >= 0)
@@ -60,10 +66,5 @@ public class DisappearReappear : MonoBehaviour
             }
             
         }
-    }
-
-    private void OnMouseDown()
-    {
-        activate = true;
     }
 }

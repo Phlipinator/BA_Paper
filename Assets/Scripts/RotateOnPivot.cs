@@ -9,6 +9,7 @@ public class RotateOnPivot : MonoBehaviour
     private float angleOffset;
 
     private bool isBeingHeld = false;
+    public float threshold = 25f;
 
     public GameObject hintPosition;
 
@@ -31,15 +32,20 @@ public class RotateOnPivot : MonoBehaviour
 
 
         //This fires while the button is pressed down
-        if (Input.GetMouseButton(0) && isBeingHeld == true)
+        if (Input.GetMouseButton(0) && isBeingHeld)
         {
 
             Vector3 v3 = Input.mousePosition - screenPos;
             float angle = Mathf.Atan2(v3.y, v3.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, 0, angle + angleOffset);
 
-            DataScript.interactionMade = true;
-            GameObject.Destroy(hintPosition);
+
+            if ((transform.rotation.z * Mathf.Rad2Deg) >= threshold || (transform.rotation.z * Mathf.Rad2Deg) <= -threshold)
+            {
+                DataScript.interactionMade = true;
+                GameObject.Destroy(hintPosition);
+            }
+            
 
 }
 

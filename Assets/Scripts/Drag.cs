@@ -7,18 +7,14 @@ public class Drag : MonoBehaviour
     private float startPosX;
     private float startPosY;
     private bool isBeingHeld = false;
-    private bool inFixPosition = false;
 
     private float orgPosX;
     private float orgPosY;
-    private float width;
-    private float height;
-    private float threshold = 3f;
+    private float threshold;
 
     public bool moveX;
     public bool moveRight;
     public bool moveUp;
-    public bool fixPosition;
 
     public GameObject hintPosition;
    
@@ -28,8 +24,8 @@ public class Drag : MonoBehaviour
         orgPosX = transform.position.x;
         orgPosY = transform.position.y;
 
-        width = GetComponent<SpriteRenderer>().bounds.size.x;
-        height = GetComponent<SpriteRenderer>().bounds.size.y;
+        threshold = GetComponent<SpriteRenderer>().bounds.size.x * 0.3f;
+
     }
 
 
@@ -37,92 +33,78 @@ public class Drag : MonoBehaviour
     void Update()
     {
 
-       if (isBeingHeld == true)
+       if (isBeingHeld)
         {
             Vector2 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            
-            // fixes in case "Right"
-            if (((this.gameObject.transform.position.x - (orgPosX + width) + threshold) > 1.0) && moveX == true && fixPosition == true)
-            {
-                inFixPosition = true;
-            }
-
-            // fixes in case "Left"
-            if (((this.gameObject.transform.position.x - (orgPosX - width) + threshold) < 1.0) && moveX == true && moveRight == false && fixPosition == true)
-            {
-                inFixPosition = true;
-            }
-
-            // fixes in case "Up"
-            if (((this.gameObject.transform.position.y - (orgPosY + height) + 2.0) > 1.0) && moveX == false && fixPosition == true)
-            {
-                inFixPosition = true;
-            }
-
-            // fixes in case "Down"
-            if (((this.gameObject.transform.position.y - (orgPosY - height) + 2.0) < 1.0) && moveX == false && fixPosition == true)
-            {
-                inFixPosition = true;
-            }
-
-
 
             // checks wether to move in X (true) or Y (false) direction
-            if (moveX == true && inFixPosition == false)
+            if (moveX)
             {
                 // checks wether to move right (true) or left (false)
-                if (moveRight == true)
+                if (moveRight)
                 {
                     if ((mousePos.x - startPosX) > orgPosX)
+                    {
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
-
-
-                        //Hint System interaction here
-                        DataScript.interactionMade = true;
-                        GameObject.Destroy(hintPosition);
+                    }
+                        
+                       if (transform.position.x >= orgPosX + threshold)
+                       {
+                            //Hint System interaction here
+                            DataScript.interactionMade = true;
+                            GameObject.Destroy(hintPosition);
+                        }
+                        
 
                 } else {
 
                     if ((mousePos.x - startPosX) < orgPosX)
+                    {
                         this.gameObject.transform.localPosition = new Vector2(mousePos.x - startPosX, orgPosY);
-
+                    }
+                        
+                    if (transform.position.x <= orgPosX - threshold)
+                    {
                         //Hint System interaction here
                         DataScript.interactionMade = true;
                         GameObject.Destroy(hintPosition);
+                    }
+                       
                 }
 
             }
-
-            // checks wether to move in X (true) or Y (false) direction
-            if (moveX == false && inFixPosition == false)
+            else
             {
-
                 // checks wether to move up (true) or down (false)
-                if (moveUp == true)
+                if (moveUp)
                 {
                     if ((mousePos.y - startPosY) > orgPosY)
+                    {
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+                    }
+                        
 
-                        //Hint System interaction here
-                        DataScript.interactionMade = true;
-                        GameObject.Destroy(hintPosition);
+                    //Hint System interaction here
+                    DataScript.interactionMade = true;
+                    GameObject.Destroy(hintPosition);
 
-                }
-                else
-                {
+                } else {
 
                     if ((mousePos.y - startPosY) < orgPosY)
+                    {
                         this.gameObject.transform.localPosition = new Vector2(orgPosX, mousePos.y - startPosY);
+                    }
+                        
 
-                        //Hint System interaction here
-                        DataScript.interactionMade = true;
-                        GameObject.Destroy(hintPosition);
+                    //Hint System interaction here
+                    DataScript.interactionMade = true;
+                    GameObject.Destroy(hintPosition);
                 }
-                
             }
+
 
         }
 
