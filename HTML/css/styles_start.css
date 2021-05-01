@@ -1,0 +1,20 @@
+.Intro{
+  height: 900px;
+  background-color: rgb(216, 243, 220);
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 10px;
+  color: black;
+  text-align: center;
+  font-size: clamp(20px, 1.5vw, 50px);
+  font-weight: lighter;
+  font-family: 'Roboto', sans-serif;
+}
+
+.button{
+  color: black;
+  text-align: center;
+  font-size: clamp(20px, 2vw, 50px);
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
