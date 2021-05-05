@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8" />
+    <title>Bachelorarbeit Gamification - Intro</title>
+
+    <link rel="stylesheet" type="text/css" href="./skeleton/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./skeleton/skeleton.css" />
+
+    <link rel="stylesheet" type="text/css" href="./css/styles_intro.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,900&display=swap"
+        rel="stylesheet" />
+
+</head>
+
+<body>
+
+
+    <div id="one">
+        <p class="text">
+            Stellen Sie sich vor sie wohnen in München.
+            <br />
+            In ihrer Nähe wird demnächst ein neues Wohngebiet mit dem Namen Eggarten-Siedlung gebaut.
+            <br />
+            Sie haben schonmal davon gehört sich aber nicht weiter mit der Thematik auseinandergesetzt.
+            <br />
+        </p>
+
+        <div>
+            <img src="./Imgs/Baum1.png" alt="Baum" id="baum1">
+        </div>
+
+        <div>
+            <img src="./Imgs/Haus4.png" alt="Haus" id="haus3">
+        </div>
+    </div>
+
+    <div id="two">
+
+        <div>
+            <img src="./Imgs/Szene1Small.png" alt="Bushaltestelle" id="szene1">
+        </div>
+
+        <p class="text">
+            Auf ihrem Weg in die Arbeit/Uni/Schule sehen Sie an ihrer Bushaltestelle ein Plakat mit der
+            Aufschrift „Eggarten-Siedlung“, einem Bild des Entwurfes sowie einem QR-Code.
+        </p>
+    </div>
+
+    <div id="three">
+        <div id="wrapper">
+            <p class="text">
+                Neugierig geworden nehmen Sie ihr Smartphone und scannen den QR-Code auf dem Plakat…
+            </p>
+
+            <div id="padding">
+
+            </div>
+
+            <button onclick="myFunction()" id="button">
+                Weiter
+            </button>
+
+        </div>
+
+        <div>
+            <img src="./Imgs/Szene2Small.png" alt="Handy" id="szene1">
+        </div>
+
+    </div>
+
+    <script>
+        function myFunction() {
+          var randomnumber = Math.random();
+          if (randomnumber < 0.5) {
+            randomnumber = 0
+          }
+          else {
+            randomnumber = 1
+          }
+    
+          if (randomnumber == 0) {
+            window.location.href = "gamification.html";
+          }
+    
+          if (randomnumber == 1) {
+            window.location.href = "noGamification.html";
+          }
+    
+    
+        }
+    
+    
+      </script>
+
+</body>
+
+</html>

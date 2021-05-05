@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Gamification</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
 
-    <link rel="stylesheet" type="text/css" href="./css/styles_gamification.css" />
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Bachelorarbeit Gamification - nicht gamifizierte Version</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/styles_gamification.css" />
 
-  </head>
-  <body>
-    <div>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -85,22 +88,31 @@
 
 
   <div class="buttonContainer">
-    Der "Weiter" - Button wird ihnen nach 5 Minuten angezeigt.
+
+    <div>
+      Der "Weiter" - Button wird ihnen nach 5 Minuten angezeigt.
+    </div>
+
     <div class="wrapper">
-      <button class="button" id="myButton" style="display:none" onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSftd_NE4QjHiaGItU5cRivOGu1ooeL4mF_R4hA2JLv-C9Az8g/viewform?usp=sf_link';">
+      <button class="button" id="myButton" style="display:none"
+        onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSftd_NE4QjHiaGItU5cRivOGu1ooeL4mF_R4hA2JLv-C9Az8g/viewform?usp=sf_link';">
         Weiter
       </button>
+    </div>
+    <div>
+      Das Laden der Anwendung kann ca. 10 Sekunden dauern, bitte haben Sie Geduld.
+    </div>
+    <script>
+      function showButton() {
+        document.getElementById("myButton").style.display = "inline";
+      }
 
-      <script>
-        function showButton() {
-          document.getElementById("myButton").style.display = "inline";
-        }
+      //this calls the function above, time is in milliseconds
+      setTimeout("showButton()", 300000);
 
-        //this calls the function above, time is in milliseconds
-        setTimeout("showButton()", 3000);
+    </script>
 
-     </script>
-  </div>
 
-  </body>
+</body>
+
 </html>
