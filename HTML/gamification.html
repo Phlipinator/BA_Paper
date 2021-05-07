@@ -1,118 +1,60 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<html>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="./css/styles_gamification.css" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,900&display=swap"
+    rel="stylesheet" />
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Bachelorarbeit Gamification - nicht gamifizierte Version</title>
-  <link rel="shortcut icon" href="TemplateData/favicon.ico">
-  <link rel="stylesheet" href="TemplateData/style.css">
-
-  <link rel="stylesheet" type="text/css" href="./css/styles_gamification.css" />
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,900&display=swap"
-    rel="stylesheet">
-
+    <title>
+        Gamifizierte Version
+    </title>
 </head>
 
 <body>
-  <div>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
+    <div id="wrapper">
+        <div id="padding"> </div>
+        <div class="text">
+            Das Laden der Anwendung kann ca. 10 Sekunden dauern, bitte haben Sie Geduld.
         </div>
-      </div>
-      <div id="unity-mobile-warning">
-        WebGL builds are not supported on mobile devices.
-      </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Gamification</div>
-      </div>
+
+        <div id="unityWrapper">
+            <iframe src="Build2/index.html" width="100%" height="680px" title="Gamification" scrolling="no"
+                allowfullscreen="true" frameBorder="0" ;>
+
+                Browser not compatible.
+
+            </iframe>
+
+        </div>
+
+        <div class="text">
+            Der "Weiter" - Button wird ihnen nach 5 Minuten angezeigt.
+        </div>
+
+        <div id="padding"> </div>
+
+        <div id="buttonWrapper">
+            <div id="button">
+                <button id="myButton" style="display:none"
+                    onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSftd_NE4QjHiaGItU5cRivOGu1ooeL4mF_R4hA2JLv-C9Az8g/viewform?usp=sf_link';">
+                    Weiter
+                </button>
+            </div>
+        </div>
+
     </div>
+
     <script>
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/FinalBuild_3.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/FinalBuild_3.data",
-        frameworkUrl: buildUrl + "/FinalBuild_3.framework.js",
-        codeUrl: buildUrl + "/FinalBuild_3.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Philipp Thalhammer",
-        productName: "Gamification",
-        productVersion: "1.0",
-      };
+        function showButton() {
+            document.getElementById("myButton").style.display = "inline";
+        }
 
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var mobileWarning = document.querySelector("#unity-mobile-warning");
-
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        container.className = "unity-mobile";
-        config.devicePixelRatio = 1;
-        mobileWarning.style.display = "block";
-        setTimeout(() => {
-          mobileWarning.style.display = "none";
-        }, 5000);
-      } else {
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
-      }
-      loadingBar.style.display = "block";
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-      document.body.appendChild(script);
-    </script>
-  </div>
-
-
-  <div class="buttonContainer">
-
-    <div>
-      Der "Weiter" - Button wird ihnen nach 5 Minuten angezeigt.
-    </div>
-
-    <div class="wrapper">
-      <button class="button" id="myButton" style="display:none"
-        onclick="location.href='https://docs.google.com/forms/d/e/1FAIpQLSftd_NE4QjHiaGItU5cRivOGu1ooeL4mF_R4hA2JLv-C9Az8g/viewform?usp=sf_link';">
-        Weiter
-      </button>
-    </div>
-    <div>
-      Das Laden der Anwendung kann ca. 10 Sekunden dauern, bitte haben Sie Geduld.
-    </div>
-    <script>
-      function showButton() {
-        document.getElementById("myButton").style.display = "inline";
-      }
-
-      //this calls the function above, time is in milliseconds
-      setTimeout("showButton()", 300000);
+        //this calls the function above, time is in milliseconds
+        setTimeout("showButton()", 300000);
 
     </script>
-
-
 </body>
 
 </html>
