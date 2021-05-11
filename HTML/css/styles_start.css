@@ -11,6 +11,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+#text{
+  padding-left: 150px;
+  padding-right: 100px;
+  text-align: center;
+}
+
 .button{
   color: black;
   text-align: center;

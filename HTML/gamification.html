@@ -14,8 +14,16 @@
 
 <body>
     <div id="wrapper">
+
         <div id="padding"> </div>
-        <div class="text">
+
+        <div class="text" id="title">
+            10 Fakten über die Eggarten-Siedlung
+        </div>
+
+        <div id="padding"> </div>
+
+        <div class="text" id="infoText">
             Das Laden der Anwendung kann ca. 10 Sekunden dauern, bitte haben Sie Geduld.
         </div>
 
@@ -30,7 +38,7 @@
         </div>
 
         <div class="text">
-            Der "Weiter" - Button wird ihnen nach 5 Minuten angezeigt.
+            Der "Weiter" - Button wird ihnen nach 4 Minuten angezeigt.
         </div>
 
         <div id="padding"> </div>
@@ -52,7 +60,14 @@
         }
 
         //this calls the function above, time is in milliseconds
-        setTimeout("showButton()", 300000);
+        setTimeout("showButton()", 240000);
+
+        function disableText(){
+            document.getElementById("infoText").style.display="none";
+        }
+
+        //this calls the function above, time is in milliseconds
+        setTimeout("disableText()", 15000);
 
     </script>
 </body>
